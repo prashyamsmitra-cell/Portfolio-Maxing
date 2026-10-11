@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static frontend portfolio: vanilla JS, hash router, anime.js, Three.js hero, live GitHub data, Supabase journal UI.",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "serve": "node scripts/dev.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
