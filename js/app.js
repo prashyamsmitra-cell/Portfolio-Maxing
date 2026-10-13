@@ -16,6 +16,10 @@ const App = (() => {
   const projectBySlug = slug => DATA.projects.find(p => p.slug === slug);
   const relatedProject = post => DATA.projects.find(p => post.related === p.slug || post.tags.includes(p.slug)) || null;
   const handle = url => { try { return new URL(url).pathname.replace(/\/+$/, '').replace(/^\/in/, ''); } catch { return ''; } };
+  const gmailCompose = (subject = '', body = '') => {
+    const params = new URLSearchParams({ view: 'cm', fs: '1', to: DATA.identity.email, su: subject, body });
+    return `https://mail.google.com/mail/?${params}`;
+  };
 
   /* ---------------- templates ---------------- */
 
@@ -64,7 +68,7 @@ const App = (() => {
           <div class="footer-links">
             <a href="${DATA.identity.links.github}" target="_blank" rel="noopener" data-cursor="OPEN ↗">GITHUB</a>
             <a href="${DATA.identity.links.linkedin}" target="_blank" rel="noopener" data-cursor="OPEN ↗">LINKEDIN</a>
-            <a href="mailto:${DATA.identity.email}" data-cursor="EMAIL ↗">EMAIL</a>
+            <a href="${gmailCompose('Hello, Prashyam')}" target="_blank" rel="noopener noreferrer" data-cursor="EMAIL ↗">EMAIL</a>
           </div>
         </div>
         <div class="footer-bottom">
@@ -481,13 +485,13 @@ const App = (() => {
         <span class="section-tag">TIMELINE</span>
       </div>
       <h1 class="page-title" data-seq="heading">EXPERIENCE</h1>
-      <p class="page-sub" data-seq="text">A spatial record of where I've been and what I've built there.</p>
+      <p class="page-sub" data-seq="text">From first principles to applied AI, each chapter adds a new way to build useful software.</p>
     </section>
     <section class="section">
-      <div class="timeline" id="timeline">
+      <div class="timeline experience-timeline" id="timeline">
         <div class="timeline-track"><span class="timeline-progress" id="timeline-progress"></span></div>
         ${DATA.experience.map((e, i) => `
-          <div class="tl-item ${i % 2 ? 'right' : ''}" data-tl-item>
+          <article class="tl-item ${i % 2 ? 'right' : ''}" data-tl-item>
             <div class="tl-node" data-tl-node></div>
             <div class="tl-card" data-stagger>
               <span class="tl-year" data-stagger-item>${e.year}</span>
@@ -497,7 +501,7 @@ const App = (() => {
               <p class="tl-desc" data-stagger-item>${e.description}</p>
               <div class="tl-tech" data-stagger-item>${e.technologies.map(t => `<span>${t}</span>`).join('')}</div>
             </div>
-          </div>`).join('')}
+          </article>`).join('')}
       </div>
     </section>`;
   }
@@ -511,36 +515,39 @@ const App = (() => {
         <span class="section-line" data-seq="line" data-draw-line></span>
         <span class="section-tag">PROFILE</span>
       </div>
-      <h1 class="page-title" data-seq="heading">ABOUT</h1>
+      <h1 class="page-title about-page-title" data-seq="heading">BUILT BY CURIOSITY.<br>SHAPED BY PRACTICE.</h1>
+      <p class="page-sub" data-seq="text">A computer science student growing into an engineer through deliberate study, team challenges, and real product work.</p>
     </section>
     <section class="section about-statements" data-reveal-section>
       <div class="about-editorial">
         <div class="about-copy">
-          <h2 class="about-line" data-seq="heading">I BUILD SOFTWARE.</h2>
-          <h2 class="about-line" data-seq="heading">I LIKE SYSTEMS THAT<br>SURVIVE CONTACT WITH<br>REAL USERS.</h2>
-          <p class="about-support" data-seq="text">Computer Science undergraduate. Full-stack developer. AI systems builder. I care about the shape of systems — how data flows, how failures are handled, how software behaves when nothing goes to plan.</p>
+          <p class="about-kicker">LEARN WITH INTENT. BUILD WITH CARE.</p>
+          <h2 class="about-line" data-seq="heading">I TURN<br>QUESTIONS INTO<br>WORKING SYSTEMS.</h2>
+          <p class="about-support" data-seq="text">I began with data structures and algorithms, then moved into full-stack development and applied AI. I care about clear decisions, useful products, and the details that make software dependable.</p>
+          <a class="about-link" href="#/experience" data-route>FOLLOW THE TIMELINE <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="about-art" data-seq="visual" aria-hidden="true">
+        <div class="about-art" data-seq="visual" role="img" aria-label="A visual timeline from 2023 to 2026">
+          <span class="about-art-year">23<span>→</span>26</span>
           <span class="aa-orbit"></span>
           <span class="aa-block one"></span>
           <span class="aa-block two"></span>
           <span class="aa-block three"></span>
-          <span class="aa-label">SYSTEM MAP</span>
+          <span class="aa-label">STUDY / PRACTICE / ENGINEER</span>
         </div>
       </div>
     </section>
     <section class="section about-grid" data-reveal-section>
       <div class="about-col" data-stagger>
         <h3 data-stagger-item>EDUCATION</h3>
-        <p data-stagger-item>B.Tech — Computer Science<br>Undergraduate, focused on systems, AI and software engineering.</p>
+        <p data-stagger-item>Computer Science undergraduate, building foundations in algorithms, software engineering, and applied AI.</p>
       </div>
       <div class="about-col" data-stagger>
         <h3 data-stagger-item>TECHNICAL INTERESTS</h3>
-        <p data-stagger-item>Full-stack development · Backend engineering · AI-powered systems · Developer tooling · Cloud & deployment · Automation</p>
+        <p data-stagger-item>Full-stack development, backend engineering, AI-powered systems, developer tooling, cloud deployment, and automation.</p>
       </div>
       <div class="about-col" data-stagger>
         <h3 data-stagger-item>ENGINEERING PHILOSOPHY</h3>
-        <p data-stagger-item>Production-oriented from day one. Logs, retries, fallbacks, audit trails — the boring plumbing that separates demos from systems.</p>
+        <p data-stagger-item>Design for the conditions software actually meets: clear failure paths, useful logs, sensible fallbacks, and maintainable decisions.</p>
       </div>
       <div class="about-col" data-stagger>
         <h3 data-stagger-item>CURRENT FOCUS</h3>
@@ -555,7 +562,7 @@ const App = (() => {
         <p data-stagger-item>
           <a href="${DATA.identity.links.github}" target="_blank" rel="noopener" data-cursor="OPEN ↗">GITHUB ↗</a><br>
           <a href="${DATA.identity.links.linkedin}" target="_blank" rel="noopener" data-cursor="OPEN ↗">LINKEDIN ↗</a><br>
-          <a href="mailto:${DATA.identity.email}" data-cursor="EMAIL ↗">EMAIL ↗</a>
+          <a href="${gmailCompose('Hello, Prashyam')}" target="_blank" rel="noopener noreferrer" data-cursor="EMAIL ↗">EMAIL ↗</a>
         </p>
       </div>
     </section>`;
@@ -570,50 +577,67 @@ const App = (() => {
         <span class="section-line" data-seq="line" data-draw-line></span>
         <span class="section-tag">CONTACT</span>
       </div>
-      <h1 class="contact-statement" data-seq="heading">HAVE A PROBLEM<br>WORTH BUILDING?</h1>
-      <a class="contact-big" href="mailto:${DATA.identity.email}" data-cursor="EMAIL ↗" data-seq="text">LET'S BUILD IT.</a>
+      <h1 class="contact-statement" data-seq="heading">HAVE A QUESTION<br>OR AN IDEA?</h1>
+      <a class="contact-big" href="${gmailCompose('Hello, Prashyam')}" target="_blank" rel="noopener noreferrer" data-cursor="OPEN GMAIL ↗" data-seq="text">WRITE TO ME.</a>
       <div class="contact-links" data-stagger>
-        <a href="mailto:${DATA.identity.email}" data-cursor="EMAIL ↗" data-stagger-item><span>EMAIL</span><span>${DATA.identity.email}</span><span>↗</span></a>
+        <a href="${gmailCompose('Hello, Prashyam')}" target="_blank" rel="noopener noreferrer" data-cursor="OPEN GMAIL ↗" data-stagger-item><span>EMAIL</span><span>${DATA.identity.email}</span><span>↗</span></a>
         <a href="${DATA.identity.links.linkedin}" target="_blank" rel="noopener" data-cursor="OPEN ↗" data-stagger-item><span>LINKEDIN</span><span>${esc(handle(DATA.identity.links.linkedin))}</span><span>↗</span></a>
         <a href="${DATA.identity.links.github}" target="_blank" rel="noopener" data-cursor="OPEN ↗" data-stagger-item><span>GITHUB</span><span>${esc(handle(DATA.identity.links.github))}</span><span>↗</span></a>
       </div>
+    </section>
+    <section class="section contact-form-section" data-reveal-section>
+      <div class="contact-form-intro">
+        <h2>START A CONVERSATION</h2>
+        <p>Share a product idea, a collaboration, or a question. I’ll reply to the email address you provide.</p>
+      </div>
+      <form class="contact-form" id="contact-form">
+        <label for="contact-name">YOUR NAME <span>(OPTIONAL)</span></label>
+        <input id="contact-name" name="name" type="text" maxlength="100" autocomplete="name">
+        <label for="contact-email">EMAIL ADDRESS</label>
+        <input id="contact-email" name="email" type="email" maxlength="254" autocomplete="email" required>
+        <label for="contact-message">WHAT WOULD YOU LIKE TO DISCUSS?</label>
+        <textarea id="contact-message" name="message" rows="6" maxlength="4000" required></textarea>
+        <div class="contact-trap" aria-hidden="true">
+          <label for="contact-website">Leave this field empty</label>
+          <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="contact-form-footer">
+          <p class="contact-form-note">Your message is sent securely. Your address is used only to reply.</p>
+          <button class="btn-solid contact-submit" type="submit">SEND ENQUIRY <span aria-hidden="true">↗</span></button>
+        </div>
+        <p class="contact-form-status" id="contact-form-status" role="status" aria-live="polite"></p>
+      </form>
     </section>`;
   }
 
   /* ---------- RESUME (section on about) ---------- */
   function resumeSection() {
+    const resumeUrl = '/assets/resume.pdf';
     return `
     <section class="section resume-section" data-reveal-section>
       <div class="section-head">
         <span class="section-marker" data-seq="marker">§</span>
         <span class="section-line" data-seq="line" data-draw-line></span>
-        <span class="section-tag">RESUME</span>
+        <span class="section-tag">RESUME / PDF</span>
       </div>
-      <div class="resume-doc" data-seq="visual">
-        <div class="rd-head">
-          <div class="rd-name">PRASHYAM SANKAR MITRA</div>
-          <div class="rd-role">SOFTWARE DEVELOPER — FULL STACK · AI SYSTEMS</div>
-          <div class="rd-meta">KOLKATA, INDIA · ${DATA.identity.email}</div>
-        </div>
-        <div class="rd-cols">
-          <div class="rd-col">
-            <h4>EXPERIENCE</h4>
-            ${DATA.experience.map(e => `<div class="rd-item"><strong>${e.role}</strong><span>${e.company} — ${e.period}</span></div>`).join('')}
-            <h4>EDUCATION</h4>
-            <div class="rd-item"><strong>B.Tech, Computer Science</strong><span>Undergraduate</span></div>
+      <div class="resume-asset" data-seq="visual">
+        <div class="resume-asset-head">
+          <div>
+            <h2>PRASHYAM SANKAR MITRA</h2>
+            <p>SOFTWARE DEVELOPER / AI SYSTEMS</p>
           </div>
-          <div class="rd-col">
-            <h4>PROJECTS</h4>
-            ${DATA.projects.map(p => `<div class="rd-item"><strong>${p.name}</strong><span>${p.tagline}</span></div>`).join('')}
-            <h4>SKILLS</h4>
-            <div class="rd-item"><strong>Full stack</strong><span>React · Node · FastAPI · PostgreSQL · Supabase</span></div>
-            <div class="rd-item"><strong>AI systems</strong><span>Python · LLMs · Gemini · Groq</span></div>
-            <div class="rd-item"><strong>Cloud</strong><span>Vercel · Cloudflare · Render</span></div>
-          </div>
+          <span class="resume-file-name">ASSET / RESUME.PDF</span>
         </div>
+        <object class="resume-preview" data="${resumeUrl}#toolbar=0&view=FitH" type="application/pdf" aria-label="Resume PDF preview">
+          <div class="resume-fallback">
+            <p>The resume preview is unavailable in this browser.</p>
+            <a href="${resumeUrl}" target="_blank" rel="noopener noreferrer">OPEN THE RESUME PDF</a>
+          </div>
+        </object>
       </div>
       <div class="resume-actions" data-seq="meta">
-        ${DATA.identity.resumeUrl ? `<a href="${esc(DATA.identity.resumeUrl)}" class="btn-solid" download data-cursor="DOWNLOAD">DOWNLOAD PDF ↓</a>` : ''}
+        <a href="${resumeUrl}" class="btn-solid" download="resume.pdf" data-cursor="DOWNLOAD">DOWNLOAD RESUME <span aria-hidden="true">↓</span></a>
+        <p>Replace <code>assets/resume.pdf</code> in the frontend repository and redeploy to publish an updated copy.</p>
       </div>
     </section>`;
   }
@@ -765,25 +789,55 @@ const App = (() => {
     if (route === 'experience') {
       const track = document.getElementById('timeline-progress');
       const items = document.querySelectorAll('[data-tl-item]');
-      let ticking = false;
-      const onScroll = () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const tl = document.getElementById('timeline');
-          const r = tl.getBoundingClientRect();
-          const progress = Math.min(1, Math.max(0, (window.innerHeight * 0.7 - r.top) / r.height));
-          track.style.transform = `scaleY(${progress})`;
-          items.forEach(item => {
-            const ir = item.getBoundingClientRect();
-            if (ir.top < window.innerHeight * 0.72) item.classList.add('active');
-          });
-          ticking = false;
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
         });
-      };
-      window.addEventListener('scroll', onScroll, { passive: true });
-      onScroll();
-      cleanupFns.push(() => window.removeEventListener('scroll', onScroll));
+        const activeCount = [...items].filter(item => item.classList.contains('active')).length;
+        track.style.transform = `scaleY(${items.length ? activeCount / items.length : 0})`;
+      }, { threshold: 0.18 });
+      items.forEach(item => observer.observe(item));
+      cleanupFns.push(() => observer.disconnect());
+    }
+
+    if (route === 'contact') {
+      const form = document.getElementById('contact-form');
+      const status = document.getElementById('contact-form-status');
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const button = form.querySelector('[type="submit"]');
+        button.disabled = true;
+        status.classList.remove('is-error');
+        status.textContent = 'Sending your message…';
+        const fields = new FormData(form);
+        const payload = {
+          name: fields.get('name'),
+          email: fields.get('email'),
+          message: fields.get('message'),
+          website: fields.get('website'),
+        };
+        try {
+          const response = await fetch(window.PortfolioConfig.apiUrl('/api/contact'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(result?.error?.message || `Message could not be sent (${response.status}).`);
+          form.reset();
+          status.textContent = 'Thank you. Your message is on its way, and a confirmation email has been sent.';
+        } catch (error) {
+          status.classList.add('is-error');
+          status.textContent = error.message === 'Failed to fetch'
+            ? 'Could not connect to the contact service. Please use the email link above.'
+            : error.message;
+        } finally {
+          button.disabled = false;
+        }
+      });
     }
 
     // project architecture diagram

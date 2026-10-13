@@ -71,6 +71,9 @@ Add or update the meta tag in the `<head>` of `index.html`:
 If the frontend and backend are served from the same domain or behind a reverse proxy (e.g. `/api/*` routed to backend):
 Set `API_BASE` to `''` (empty string) to use root-relative paths.
 
+### Resume asset
+The About page previews `/assets/resume.pdf` inline. Replace `assets/resume.pdf` in this repository with your current PDF and redeploy the frontend to publish it. PDF is required for the embedded preview; other document formats do not render consistently in browsers.
+
 ---
 
 ## Local Development
