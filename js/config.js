@@ -14,10 +14,10 @@
   /**
    * BACKEND BASE URL:
    * - Local development: 'http://localhost:3001' (matches backend default port)
-   * - Production: Set to your deployed backend URL (e.g. 'https://portfolio-backend.vercel.app')
+   * - Production: 'https://portfolio-max-backend.onrender.com'
    * - Same-origin / Reverse proxy: Set to '' (empty string) to use root-relative paths like '/api/*'
    */
-  const DEFAULT_API_BASE = 'http://localhost:3001';
+  const DEFAULT_API_BASE = 'https://portfolio-max-backend.onrender.com';
 
   const rawBase = (
     userConfig.API_BASE !== undefined
