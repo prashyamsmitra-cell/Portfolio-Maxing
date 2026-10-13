@@ -628,7 +628,7 @@ const App = (() => {
           </div>
           <span class="resume-file-name">ASSET / RESUME.PDF</span>
         </div>
-        <object class="resume-preview" data="${resumeUrl}#toolbar=0&view=FitH" type="application/pdf" aria-label="Resume PDF preview">
+        <object class="resume-preview" data="${resumeUrl}#view=FitH" type="application/pdf" aria-label="Resume PDF preview">
           <div class="resume-fallback">
             <p>The resume preview is unavailable in this browser.</p>
             <a href="${resumeUrl}" target="_blank" rel="noopener noreferrer">OPEN THE RESUME PDF</a>
@@ -637,7 +637,6 @@ const App = (() => {
       </div>
       <div class="resume-actions" data-seq="meta">
         <a href="${resumeUrl}" class="btn-solid" download="resume.pdf" data-cursor="DOWNLOAD">DOWNLOAD RESUME <span aria-hidden="true">↓</span></a>
-        <p>Replace <code>assets/resume.pdf</code> in the frontend repository and redeploy to publish an updated copy.</p>
       </div>
     </section>`;
   }

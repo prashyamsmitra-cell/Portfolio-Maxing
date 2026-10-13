@@ -19,7 +19,8 @@ const MIME = {
   '.jpeg': 'image/jpeg',
   '.webp': 'image/webp',
   '.gif': 'image/gif',
-  '.ico': 'image/x-icon'
+  '.ico': 'image/x-icon',
+  '.pdf': 'application/pdf'
 };
 
 const isBlocked = rel => /(^|[/\\])(node_modules|\.git|\.env)[/\\]?/.test(rel);

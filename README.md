@@ -72,7 +72,7 @@ If the frontend and backend are served from the same domain or behind a reverse 
 Set `API_BASE` to `''` (empty string) to use root-relative paths.
 
 ### Resume asset
-The About page previews `/assets/resume.pdf` inline. Replace `assets/resume.pdf` in this repository with your current PDF and redeploy the frontend to publish it. PDF is required for the embedded preview; other document formats do not render consistently in browsers.
+The About page displays `/assets/resume.pdf` in the browser's PDF viewer and provides a direct download link. A PDF is required for the embedded preview because other document formats do not render consistently in browsers.
 
 ---
 
